@@ -3,7 +3,9 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { sliderItems } from '../data';
+import phone from '../responsive'
 const Container = styled.div`
+ ${phone({ display: 'none' })}
     width: 100%;
     height: 100vh;
     display: flex;
@@ -13,7 +15,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
-    transform : translateX(0vw)
+    transition: all 1.5s ease;
+    transform : translateX(${props=>props.slideIndex * -100}vw)
   
 `;
 const SliderContainer = styled.div`
@@ -76,6 +79,14 @@ const DirectionArrow = styled.div`
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0)
     const clickArrow = (direction) => {
+        if(direction==="left"){
+            setSlideIndex(slideIndex > 0 ? slideIndex-1 : 2)
+
+        }
+        else{
+            setSlideIndex(slideIndex < 2 ? slideIndex+1 : 0)
+        }
+        
 
     };
   return ( <Container>
@@ -86,9 +97,9 @@ const Slider = () => {
  
     </DirectionArrow>
 
-    <Wrapper>
+    <Wrapper slideIndex = {slideIndex}>
     {sliderItems.map(item=>(
-        <SliderContainer bg={item.bg}>
+        <SliderContainer bg={item.bg} key={item.id}>
             <ImageContainer>
 
                 <Img src={item.img}></Img>

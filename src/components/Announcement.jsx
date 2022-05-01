@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 const Announcement = () => {
   return <Container>
-      New Deal !  Flat 50% Off upto Rs 200 on First Order
+      Super Deal ! Flat 50% Off on First Order
   </Container>;
 };
 
